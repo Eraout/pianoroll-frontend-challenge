@@ -3,7 +3,10 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+:root {
+  --index: calc(1vh + 1vw);
+  --animation-transform: 0;
+}
 body {
   font-family: 'Mulish', sans-serif;
   cursor: default;
@@ -31,10 +34,14 @@ body {
   fill: white;
 }
 
-#pianoRollContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+
+#pianoRollContainer { /*Create grid to display roll`s in columns*/
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 19px; 
+  justify-items: center;
+  margin-top: calc(var(--index) * 1.35);
 }
 
 h1 {
@@ -71,16 +78,38 @@ button:hover {
 
 .piano-roll-svg {
   border: 2px solid #381815;
+  border-radius: 1.1em;
 }
 
 .piano-roll-card {
-  border: 1px solid #ccc;
+  border: 3px solid #ccc;
+  border-radius: 10%;
   margin-bottom: 10px;
   padding: 10px;
   width: 50%;
   box-sizing: border-box;
+  background-color: whitesmoke;
+  z-index: 0;
 }
 
+.piano-roll-card { /*Animation for card*/
+  transition: 1.5s cubic-bezier(.05, .5, 0, 1);
+}
+.card-left:hover {
+  will-change: transform;
+  transform: scale(2.2) rotateX(var(--move-y)) rotateY(var(--move-x)) translateX(calc(var(--index) * 7)) translateY(calc(var(--index) * 2.4));
+  z-index: 1;
+}
+.card-center:hover {
+  will-change: transform;
+  transform: scale(2.2) rotateX(var(--move-y)) rotateY(var(--move-x)) translateY(calc(var(--index) * 2.4)); 
+  z-index: 1;
+}
+.card-right:hover {
+  will-change: transform;
+  transform: scale(2.2) rotateX(var(--move-y)) rotateY(var(--move-x)) translateX(calc(var(--index) * -7)) translateY(calc(var(--index) * 2.4));
+  z-index: 1;
+}
 .description {
   margin-top: 10px;
 }
