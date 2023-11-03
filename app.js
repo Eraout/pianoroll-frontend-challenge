@@ -21,7 +21,7 @@ class PianoRollDisplay {
   preparePianoRollCard(rollId) {
     const cardDiv = document.createElement('div');
     cardDiv.classList.add('piano-roll-card');
-    switch(rollId % 3) { // Add animation class
+    switch(rollId % 3) { // Add animation help class
       case 0:
         cardDiv.classList.add('card-left');
         break;
@@ -32,9 +32,30 @@ class PianoRollDisplay {
         cardDiv.classList.add('card-right');
         break;
     }
-    cardDiv.addEventListener("click", function() { // Creating onClick function
-      window.location.href = 'index-main-view.html';});
     
+    cardDiv.addEventListener('click', function() {    // Creating onClick function for cards
+      let mainCard = document.querySelector('.main-card');
+      let gridContainer = document.querySelector("#pianoRollContainer, #pianoRollMainVeiwContainer"); // Find containers * or *
+      let allCards = gridContainer.querySelectorAll('.piano-roll-card');
+  
+      allCards.forEach(card => {  // Delleting useless classes and adding important
+          card.classList.remove('card-left', 'card-center', 'card-right');
+          card.classList.add('slide-card');
+      });
+  
+      if (mainCard) { // Changing main card
+          mainCard.classList.remove('main-card');
+          mainCard.classList.add('slide-card');
+      }
+  
+      this.classList.remove('slide-card');
+      this.classList.add('main-card');
+      
+      if (gridContainer) { // Changing container properties
+          gridContainer.id = "pianoRollMainVeiwContainer";
+      }
+  });
+  
     // Create and append other elements to the card container as needed
     const descriptionDiv = document.createElement('div');
     descriptionDiv.classList.add('description');
@@ -79,14 +100,10 @@ document.getElementById('loadCSV').addEventListener('click', async () => {
 
 
 document.addEventListener('mousemove', e => { // Getting mousemove cordinate X and Y
-  Object.assign(document.documentElement, {
+  Object.assign(document.documentElement, {  // Adding cordinates to <html> style
       style: `
-      --move-x: ${(e.clientX - window.innerWidth / 2) * -.05}deg;
+      --move-x: ${(e.clientX - window.innerWidth / 2) * -.05}deg; 
       --move-y: ${(e.clientY - window.innerHeight / 2) * -.01}deg;
       `
   })
 })
-
-
-
-

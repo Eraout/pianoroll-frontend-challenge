@@ -44,6 +44,13 @@ body {
   margin-top: calc(var(--index) * 1.35);
 }
 
+#pianoRollMainVeiwContainer { 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 40px 150px;
+}
+
 h1 {
   margin-bottom: 20px;
   font-size: 42px;
@@ -112,4 +119,16 @@ button:hover {
 }
 .description {
   margin-top: 10px;
+}
+.main-card {
+  order: 1; /* Это будет первая карточка */
+  flex-basis: 70%;
+  flex-direction: column; /* Занимает половину контейнера */
+}
+
+.slide-card {
+  order: 2; /* Эти карточки будут после главной */
+  flex-basis: 25%; /* Занимает половину контейнера */
+  margin: 5px;
+  flex-direction: column;
 }
