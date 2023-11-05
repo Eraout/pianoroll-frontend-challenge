@@ -1,18 +1,22 @@
+/* Global reset to remove default margin, padding, and sets up box-sizing to include padding and border in the width and height of elements */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+/* Defines root CSS variables for consistent sizing and dynamic calculations */
 :root {
-  --index: calc(1vh + 1vw);
-  --animation-transform: 0;
+  --index: calc(1vh + 1vw); /* A calculated value often used to create responsive units based on viewport size */
+  --animation-transform: 0; /* Placeholder for animation transform, can be changed in JavaScript */
+  --card-height: calc(var(--index) * 10.5); /* Dynamic height for cards, based on the viewport */
 }
+/* Styles for the body that define the base font, cursor, and full viewport height */
 body {
   font-family: 'Mulish', sans-serif;
   cursor: default;
   background-color: #F0F0F0;
   color: #1C1C1A;
-  height: 100vh; /* Use viewport height instead of 100% to occupy full screen height */
+  height: 100vh; /* Occupies full screen height */
   text-align: center;
   overflow: auto;
   display: flex;
@@ -20,12 +24,13 @@ body {
   position: relative;
 }
 
+/* Styling for the navigation bar */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: #154151;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);  /* optional drop shadow */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Adds a subtle drop shadow */
 }
 
 .logo-container img {
@@ -35,19 +40,20 @@ body {
 }
 
 
-
-#pianoRollContainer { /*Create grid to display roll`s in columns*/
+/* Grid container for piano rolls, creating a 3-column layout with gaps */
+#pianoRollContainer { 
   display: grid;
   grid-template-columns: repeat(3, 1fr); 
   gap: 19px; 
   justify-items: center;
   margin-top: calc(var(--index) * 1.35);
 }
-
+/* Container for the main view of the piano roll with wrapped flex items */
 #pianoRollMainVeiwContainer { 
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  flex-direction: row-reverse;
   margin: 40px 150px;
 }
 
@@ -97,38 +103,75 @@ button:hover {
   box-sizing: border-box;
   background-color: whitesmoke;
   z-index: 0;
+  will-change: transform; /* Indicates to browsers that the transform property will change for potential performance optimizations */
+}
+.piano-roll-card::before {
+  content: '';
+  position: absolute;
+  top: -20px; 
+  right: -35px; 
+  bottom: -20px; 
+  left: -35px; 
+  z-index: -1;
 }
 
-.piano-roll-card { /*Animation for card*/
+/* Remove the background of the pseudo-element on hover */
+.piano-roll-card:hover::before {
+  background: transparent;
+}
+
+/* Transition effect for the card, giving it a smooth animation for transformations */
+.piano-roll-card {
   transition: 1.5s cubic-bezier(.05, .5, 0, 1);
 }
+/* Specific styles for cards on hover, adding shadows and a 3D effect using the CSS variables set on the :root */
 .card-left:hover {
-  will-change: transform;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
   transform: scale(2.2) rotateX(var(--move-y)) rotateY(var(--move-x)) translateX(calc(var(--index) * 7)) translateY(calc(var(--index) * 2.4));
   z-index: 1;
 }
 .card-center:hover {
-  will-change: transform;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   transform: scale(2.2) rotateX(var(--move-y)) rotateY(var(--move-x)) translateY(calc(var(--index) * 2.4)); 
   z-index: 1;
 }
 .card-right:hover {
-  will-change: transform;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   transform: scale(2.2) rotateX(var(--move-y)) rotateY(var(--move-x)) translateX(calc(var(--index) * -7)) translateY(calc(var(--index) * 2.4));
   z-index: 1;
 }
 .description {
-  margin-top: 10px;
+  margin: 10px 0;
 }
-.main-card {
-  order: 1; /* Это будет первая карточка */
-  flex-basis: 70%;
-  flex-direction: column; /* Занимает половину контейнера */
+/* Additional classes for various piano roll cards with specific sizes and layouts */
+.piano-roll-card.slide-card{
+  width: 100%;
+  margin-bottom: 30px;
 }
-
-.slide-card {
-  order: 2; /* Эти карточки будут после главной */
-  flex-basis: 25%; /* Занимает половину контейнера */
-  margin: 5px;
+.piano-roll-card.main-card{
+  width: 100%;
+  height: calc(var(--card-height)*2);
+  display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--index) * 2);
+}
+.main-card .piano-roll-svg{
+  height: 100%;
+  margin: 40px 10px;
+}
+.slide-card-container {
+    display: flex;
+    flex-direction: column;
+}
+.main-card-container{
+  display: flex;
+  align-items: flex-start;
+  width: 70%;
+  margin: 0;
+}
+/* Hidden state for the main button */
+#main-active{
+  display: none;
 }

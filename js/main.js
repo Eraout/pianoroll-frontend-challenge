@@ -1,70 +1,60 @@
-
-document.addEventListener('mousemove', e => { // Getting cordinates
-    Object.assign(document.documentElement, {
-        style: `
-        --move-x: ${(e.clientX - window.innerWidth / 2) * -.005}deg;
-        --move-y: ${(e.clientY - window.innerHeight / 2) * -.01}deg;
-        `
-    })
+// Listen to mousemove event on the document
+document.addEventListener('mousemove', e => { 
+  // Set CSS variables on the document root for moving the background based on mouse position
+  Object.assign(document.documentElement, {
+      style: `
+      --move-x: ${(e.clientX - window.innerWidth / 2) * -.005}deg;
+      --move-y: ${(e.clientY - window.innerHeight / 2) * -.01}deg;
+      `
+  })
 })
-function redirectToIndex() { // Direct to main page
-    window.location.href = '/html/index.html';
+
+// Function to redirect to the index page
+function redirectToIndex() {
+    window.location.href = '/html/index.html'; // Sets the window's location to the index.html, causing a page redirect
 }
 
+// Initialize particles.js with configuration for the particles effect
 particlesJS("particles-js", {
     particles: {
-      number: { value: 80, density: { enable: true, value_area: 800 } },
-      color: { value: "#ffffff" },
+      number: {
+        value: 80, // Number of particles
+        density: { enable: true, value_area: 800 } // Density of particles
+      },
+      color: { value: "#ffffff" }, // Color of particles
       shape: {
-        type: "circle",
-        stroke: { width: 0, color: "#000000" },
-        polygon: { nb_sides: 5 },
-        image: { src: "img/github.svg", width: 100, height: 100 }
+        type: "circle", // Shape of particles
+        stroke: { width: 0, color: "#000000" }, // Stroke of the particles
+        polygon: { nb_sides: 5 }, // If polygon, number of sides
+        image: { src: "img/github.svg", width: 100, height: 100 } // If image, source and dimensions
       },
       opacity: {
-        value: 0.352750653390415,
-        random: true,
-        anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
+        value: 0.352750653390415, // Opacity of particles
+        random: true, // Randomize opacity
+        anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false } // Animation settings for opacity
       },
       size: {
-        value: 3,
-        random: true,
-        anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
+        value: 3, // Size of particles
+        random: true, // Randomize size
+        anim: { enable: false, speed: 40, size_min: 0.1, sync: false } // Animation settings for size
       },
       line_linked: {
-        enable: false,
-        distance: 150,
-        color: "#ffffff",
-        opacity: 0.4,
-        width: 1
+        enable: false, // Enable/disable line linking between particles
+        distance: 150, // Maximum distance for line linking
+        color: "#ffffff", // Color of the lines
+        opacity: 0.4, // Opacity of the lines
+        width: 1 // Width of the lines
       },
       move: {
-        enable: true,
-        speed: 1.6,
-        direction: "none",
-        random: false,
-        straight: false,
-        out_mode: "out",
-        bounce: false,
-        attract: { enable: false, rotateX: 600, rotateY: 1200 }
+        enable: true, // Enable/disable particle movement
+        speed: 1.6, // Speed of particle movement
+        direction: "none", // Direction of movement
+        random: false, // Randomize movement
+        straight: false, // Straight movement without variation
+        out_mode: "out", // Movement out of canvas boundaries
+        bounce: false, // Bounce particles off canvas edges
+        attract: { enable: false, rotateX: 600, rotateY: 1200 } // Attraction/repulsion settings
       }
     },
-    interactivity: {
-      detect_on: "canvas",
-      events: {
-        onhover: { enable: true, mode: "repulse" },
-        onclick: { enable: false, mode: "bubble" },
-        resize: true
-      },
-      modes: {
-        grab: { distance: 400, line_linked: { opacity: 1 } },
-        bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
-        repulse: { distance: 200, duration: 0.4 },
-        push: { particles_nb: 4 },
-        remove: { particles_nb: 2 }
-      }
-    },
-    retina_detect: true
-  });
- 
-  
+    retina_detect: true // Enable/disable retina display detection
+});

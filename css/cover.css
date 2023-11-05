@@ -1,13 +1,15 @@
+/* Universal Reset - Sets the default padding and margin to 0 and changes the box-sizing model to border-box for every element */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+/* Root Variables - Defines CSS variables for global use */
 :root {
   --index: calc(1vw + 1vh);
   --transition: 1.5s cubic-bezier(.05, .5, 0, 1); /*Animation transition presset*/
 }
-/*Adding fonts*/
+/* Custom Fonts - Imports custom fonts to be used in the webpage */
 @font-face {
   font-family: kemerik-cosmos;
   src: url(/fonts/kamerik205-heavy.woff2);
@@ -17,12 +19,13 @@
   font-family: merri-weather-cosmos;
   src: url(/fonts/merriweather-regular-italic.woff2);
 }
+/* Body Styling - Sets the background color, text color, and default font for the webpage */
 body {
   background-color: black;
   color: #fff;
   font-family: kemerik-cosmos;
 }
-
+/* Logo Styling - Sizes and positions the logo on the page */
 .logo {
   --logo-size: calc(var(--index) * 7.1);  /*Calculateting logo size by using --index: calc(1vh + 1vw);*/
   width: var(--logo-size);
@@ -35,10 +38,12 @@ body {
   top: calc(var(--index) * 2.8);
   z-index: 1;
 }
+/* 3D Perspective Container */
 .layers {
   perspective: 1000px;
   overflow: hidden;
 }
+/* Container for Layered Items */
 .layers__container {
   height: 100vh;
   min-height: 500px;
@@ -47,6 +52,7 @@ body {
   will-change: transform;
   transition: transform var(--transition);
 }
+/* Styling for Layer Items */
 .layers__items{
   position: absolute;
   inset: -5vw;
@@ -56,7 +62,7 @@ body {
   align-items: center;
   justify-content: center;
 }
-/*layer properties*/
+/* Individual Layer Properties - Applies 3D transformation to each layer */
 .layer-1{
   transform: translateZ(-55px) scale(1.06);
 }
@@ -69,21 +75,10 @@ body {
 .layer-4{
   transform: translateZ(280px) scale(.5);
 }
-.layer-5{
-  transform: translateZ(300px) scale(.88);
+.layer-4 {
+  pointer-events: none; 
 }
-.layer-6{
-  transform: translateZ(320px) scale(.88);
-}
-.layer-7{
-  transform: translateZ(420px) scale(.88);
-}
-.layer-8{
-  transform: translateZ(520px) scale(.7);
-}
-.layer-9{
-  transform: translateZ(620px) scale(.8);
-}
+/* Content Styling */
 .hero-content {
   font-size: calc(var(--index) * 2.9);
   text-align: center;
@@ -102,6 +97,7 @@ body {
   font-size: calc(var(--index) * .73);
   line-height: 3;
 }
+/* Button Styling */
 .button-start {
   font-family: Arial;
   font-weight: 600;
@@ -117,12 +113,12 @@ body {
   cursor: pointer;
   transition: var(--transition);
 }
- .layer-4 {
-  pointer-events: none;
-}
+/* Active Button State */
 .button-start:active{
   border: rgb(255, 255, 255) 3px solid;
 }
+
+/* Particles.js Container Styling */
 #particles-js {
   position: absolute;
   width: 100%;
